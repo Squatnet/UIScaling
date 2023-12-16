@@ -1,0 +1,176 @@
+[gd_scene load_steps=7 format=3 uid="uid://cs65skj5c1gc7"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_fhthy"]
+[ext_resource type="Script" path="res://Player.gd" id="1_pigv7"]
+[ext_resource type="Script" path="res://Scale Control.gd" id="3_kc7fd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wd854"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_r6jbh"]
+size = Vector2(20, 20)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3gx07"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_fhthy")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.720823, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="RigidBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_wd854")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+use_collision = true
+mesh = SubResource("PlaneMesh_r6jbh")
+
+[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("scale_panel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2551, 1.28991)
+script = ExtResource("1_pigv7")
+scale_panel = NodePath("../CanvasLayer/Scale Control")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_3gx07")
+metadata/_edit_lock_ = true
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.601317, -0.306487)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.743448, 0.668793, 0, -0.668793, 0.743448, -5.31549, 6.61514, 8.1355)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Scale Control" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_kc7fd")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Scale Control"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Scale Control/Panel"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 93.0
+offset_right = 74.0
+offset_bottom = 116.0
+
+[node name="Label2" type="Label" parent="CanvasLayer/Scale Control/Panel"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 22.0
+offset_right = 39.0
+offset_bottom = 45.0
+text = "W"
+
+[node name="Label6" type="Label" parent="CanvasLayer/Scale Control/Panel"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 59.0
+offset_right = 41.0
+offset_bottom = 82.0
+text = "H"
+
+[node name="W" type="Label" parent="CanvasLayer/Scale Control/Panel"]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 24.0
+offset_right = 170.0
+offset_bottom = 47.0
+
+[node name="H" type="Label" parent="CanvasLayer/Scale Control/Panel"]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 57.0
+offset_right = 170.0
+offset_bottom = 80.0
+
+[node name="M" type="Label" parent="CanvasLayer/Scale Control/Panel"]
+layout_mode = 0
+offset_left = 133.0
+offset_top = 128.0
+offset_right = 173.0
+offset_bottom = 151.0
+
+[node name="Width" type="HSlider" parent="CanvasLayer/Scale Control/Panel"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 27.0
+offset_right = 285.0
+offset_bottom = 43.0
+min_value = 0.5
+max_value = 2.0
+step = 0.01
+value = 1.0
+
+[node name="Height" type="HSlider" parent="CanvasLayer/Scale Control/Panel"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 61.0
+offset_right = 282.0
+offset_bottom = 77.0
+min_value = 0.5
+max_value = 2.0
+step = 0.01
+value = 1.5
+
+[node name="Multiplier" type="HSlider" parent="CanvasLayer/Scale Control/Panel"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 132.0
+offset_right = 288.0
+offset_bottom = 148.0
+min_value = 0.5
+max_value = 2.0
+step = 0.01
+value = 1.0
+
+[node name="Button" type="Button" parent="CanvasLayer/Scale Control/Panel"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 88.0
+offset_right = 211.0
+offset_bottom = 119.0
+text = "SET BASE W+H"
+
+[node name="Button2" type="Button" parent="CanvasLayer/Scale Control/Panel"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 160.0
+offset_right = 214.0
+offset_bottom = 191.0
+text = "SET BY FACTOR"
+
+[node name="Button" type="Button" parent="CanvasLayer/Scale Control"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 467.0
+offset_top = 35.0
+offset_right = 641.0
+offset_bottom = 61.0
+text = "Press ESC to see menu"
+
+[connection signal="drag_ended" from="CanvasLayer/Scale Control/Panel/Width" to="CanvasLayer/Scale Control" method="_on_width_drag_ended"]
+[connection signal="drag_ended" from="CanvasLayer/Scale Control/Panel/Height" to="CanvasLayer/Scale Control" method="_on_height_drag_ended"]
+[connection signal="drag_ended" from="CanvasLayer/Scale Control/Panel/Multiplier" to="CanvasLayer/Scale Control" method="_on_multiplier_drag_ended"]
+[connection signal="pressed" from="CanvasLayer/Scale Control/Panel/Button" to="CanvasLayer/Scale Control" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Scale Control/Panel/Button2" to="CanvasLayer/Scale Control" method="_on_button_2_pressed"]
